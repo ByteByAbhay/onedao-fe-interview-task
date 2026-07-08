@@ -4,14 +4,19 @@ A responsive React application that displays a collection of product cards and i
 
 ## Status
 
-Project scaffolding is complete. UI screens (Login, Register, OTP, Dashboard, Product Cards) are not yet implemented.
+- [x] Project scaffolding
+- [x] Login screen (`/login`)
+- [x] Register screen (`/register`)
+- [x] OTP screen (`/otp`)
+- [ ] Dashboard (optional)
+- [ ] Product cards
 
 ## Tech Stack
 
 | Purpose | Choice | Why |
 |---|---|---|
-| Framework | [Next.js 16](https://nextjs.org) (React 19, App Router, TypeScript) | Official, actively maintained way to scaffold a modern React app — Create React App is deprecated. Includes routing, bundling, and optimized builds out of the box, so pages like `/login`, `/register`, `/otp`, and `/dashboard` map cleanly to folders. |
-| Styling | [Bootstrap 5](https://getbootstrap.com) | Required by the task spec; used via utility/component classes on plain markup (no extra component-wrapper library needed). |
+| Framework | [Next.js 16](https://nextjs.org) (React 19, App Router, TypeScript) | Official, actively maintained way to scaffold a modern React app - Create React App is deprecated. Includes routing, bundling, and optimized builds out of the box, so pages like `/login`, `/register`, `/otp`, and `/dashboard` map cleanly to folders. |
+| Styling | [Bootstrap 5](https://getbootstrap.com) via [React Bootstrap](https://react-bootstrap.github.io) | Required by the task spec. React Bootstrap wraps Bootstrap's CSS in React components (`Form`, `InputGroup`, `Button`, `Container`/`Row`/`Col`) instead of raw `className` strings, so markup stays declarative and accessible (correct ARIA roles/keyboard handling) out of the box. |
 | Icons | [Font Awesome](https://fontawesome.com) (`@fortawesome/react-fontawesome` + free icon sets) | Required by the task spec; the official React bindings render icons as SVG components instead of an icon font, which keeps bundle size down and avoids FOUC. |
 | Language | TypeScript | Type safety and editor autocomplete across components and data models (e.g. the `Product` type). |
 
@@ -20,13 +25,32 @@ Project scaffolding is complete. UI screens (Login, Register, OTP, Dashboard, Pr
 ```
 src/
   app/
-    layout.tsx      # Root layout — global styles (Bootstrap + globals.css) load here
-    page.tsx         # Home route
+    layout.tsx        # Root layout - global styles (Bootstrap, Font Awesome, globals.css) load here
+    page.tsx           # Home route - redirects to /login
     globals.css
-public/               # Static assets (images, icons)
+    login/
+      page.tsx          # /login route
+    register/
+      page.tsx          # /register route
+    otp/
+      page.tsx          # /otp route
+  components/
+    auth/
+      AuthShell.tsx           # Shared split-panel layout (hero image panel + form panel) for auth screens
+      FormField.tsx           # Shared labeled input (icon + error message) built on React Bootstrap Form/InputGroup
+      PasswordToggleButton.tsx  # Shared show/hide password button
+      OtpInput.tsx            # Shared 6-digit OTP input (auto-advance, backspace, paste support)
+      LoginForm.tsx           # Login form - composes AuthShell + FormField
+      RegisterForm.tsx        # Register form - composes AuthShell + FormField
+      OtpForm.tsx             # OTP form - composes AuthShell + OtpInput
+      auth.module.css         # Shared visual styling for all auth screens
+  lib/
+    fontawesome.ts     # Font Awesome config (disables auto CSS injection)
+public/
+  auth-hero.jpg         # Hero photo used in the auth screens' image panel
 ```
 
-Upcoming routes (`login`, `register`, `otp`, `dashboard`) and shared UI (`components/ProductCard`, etc.) will be added under `src/app/` and `src/components/` as they're built.
+Login, Register, and OTP all compose the same `AuthShell`/`FormField` building blocks, so any future auth screen can reuse them too. On successful registration, `RegisterForm` navigates to `/otp` to mirror the typical sign-up flow. Upcoming route (`dashboard`, optional) and shared UI (`components/ProductCard`, etc.) will be added under `src/app/` and `src/components/` as they're built.
 
 ## Getting Started
 
