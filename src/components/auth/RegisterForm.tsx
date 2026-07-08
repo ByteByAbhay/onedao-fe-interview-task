@@ -4,8 +4,10 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "react-bootstrap/Button";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import AuthShell from "./AuthShell";
 import FormField from "./FormField";
+import PasswordToggleButton from "./PasswordToggleButton";
 import styles from "./auth.module.css";
 
 type FieldErrors = {
@@ -22,6 +24,8 @@ export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -79,6 +83,7 @@ export default function RegisterForm() {
           id="email"
           label="Email Id"
           type="email"
+          icon={faEnvelope}
           placeholder="Enter your email id"
           value={email}
           onChange={setEmail}
@@ -89,23 +94,37 @@ export default function RegisterForm() {
         <FormField
           id="password"
           label="Password"
-          type="password"
+          type={showPassword ? "text" : "password"}
+          icon={faLock}
           placeholder="Enter your password"
           value={password}
           onChange={setPassword}
           error={errors.password}
           autoComplete="new-password"
+          endAdornment={
+            <PasswordToggleButton
+              visible={showPassword}
+              onToggle={() => setShowPassword((current) => !current)}
+            />
+          }
         />
 
         <FormField
           id="confirmPassword"
           label="Confirm Password"
-          type="password"
+          type={showConfirmPassword ? "text" : "password"}
+          icon={faLock}
           placeholder="Enter your confirm password"
           value={confirmPassword}
           onChange={setConfirmPassword}
           error={errors.confirmPassword}
           autoComplete="new-password"
+          endAdornment={
+            <PasswordToggleButton
+              visible={showConfirmPassword}
+              onToggle={() => setShowConfirmPassword((current) => !current)}
+            />
+          }
         />
 
         <Button type="submit" className={`w-100 ${styles.submitBtn}`} disabled={isSubmitting}>

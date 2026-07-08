@@ -28,7 +28,7 @@
 }
 
 .formPanel {
-  padding: 3.5rem 2rem;
+  padding: 2rem 2rem;
 }
 
 .title {
@@ -159,6 +159,7 @@
   padding: 0.7rem !important;
   font-weight: 400;
   font-size: 13px;
+  margin-top: 20px;
   transition: background 0.15s ease, transform 0.1s ease;
 }
 
@@ -177,7 +178,8 @@
 
 .footerText {
   text-align: center;
-  margin-top: 14px;
+  margin-top: 30px;
+  margin-bottom: 0; 
   font-weight: 400;
   font-family: inter, sans-serif;
   color: #9fa2b4;

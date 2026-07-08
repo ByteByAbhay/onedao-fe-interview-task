@@ -33,7 +33,7 @@ export default function OtpForm() {
   return (
     <AuthShell title="Verify your email" subtitle="Enter the OTP from your register email id">
       <form onSubmit={handleSubmit} noValidate>
-        <div className="mb-4">
+        <div className="mb-2">
           <OtpInput value={code} onChange={setCode} error={error} />
         </div>
 
