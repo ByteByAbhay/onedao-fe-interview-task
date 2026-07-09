@@ -1,0 +1,47 @@
+.page {
+  background: #ffffff;
+  padding: 2rem 1rem;
+}
+
+.code {
+  font-size: clamp(4rem, 12vw, 7rem);
+  font-weight: 800;
+  color: #101010;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #252733;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #9fa2b4;
+  font-size: 1rem;
+  max-width: 420px;
+  margin-bottom: 2rem;
+}
+
+.homeBtn {
+  background: #101010 !important;
+  border-color: #101010 !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1.75rem !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.homeBtn:hover {
+  background: #2a2a2a !important;
+  border-color: #2a2a2a !important;
+}
+
+.homeBtn:active {
+  transform: scale(0.98);
+}

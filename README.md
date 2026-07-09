@@ -8,6 +8,7 @@ A responsive React application that displays a collection of product cards and i
 - [x] Login screen (`/login`)
 - [x] Register screen (`/register`)
 - [x] OTP screen (`/otp`)
+- [x] 404 not found page
 - [ ] Dashboard (optional)
 - [ ] Product cards
 
@@ -34,6 +35,8 @@ src/
       page.tsx          # /register route
     otp/
       page.tsx          # /otp route
+    not-found.tsx       # 404 page (matches unmatched routes)
+    not-found.module.css
   components/
     auth/
       AuthShell.tsx           # Shared split-panel layout (hero image panel + form panel) for auth screens
