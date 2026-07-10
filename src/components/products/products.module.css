@@ -44,6 +44,17 @@
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.cartBadgeWrap:hover {
+  background-color: #2a2a2a;
+}
+
+.cartBadgeWrap:active {
+  transform: scale(0.95);
 }
 
 .cartCount {
@@ -245,3 +256,223 @@
   background: #2a2a2a !important;
   border-color: #2a2a2a !important;
 }
+
+/* ---------- Cart Modal ---------- */
+
+.modalTitle {
+  font-weight: 700;
+  color: #252733;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e5ee;
+}
+
+.cartItem:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.cartItemImage {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef0f6;
+  flex-shrink: 0;
+}
+
+.cartItemDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.cartItemName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #252733;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cartItemCategory {
+  font-size: 0.75rem;
+  color: #9fa2b4;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cartItemPrice {
+  font-size: 0.9rem;
+  color: #6b6c7e;
+}
+
+.cartItemControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qtyBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #e2e5ee;
+  background: #ffffff;
+  color: #252733;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qtyBtn:hover {
+  background: #eef0f6;
+  border-color: #cbd2e0;
+}
+
+.qtyValue {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #252733;
+  min-width: 20px;
+  text-align: center;
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  color: #cbd2e0;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+
+.removeBtn:hover {
+  color: #e1445b;
+}
+
+.modalFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summaryLabel {
+  font-size: 1rem;
+  color: #9fa2b4;
+  font-weight: 600;
+}
+
+.summaryValue {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #252733;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.clearBtn {
+  flex: 1;
+  background: #ffffff !important;
+  border: 1px solid #cbd2e0 !important;
+  color: #6b6c7e !important;
+  border-radius: 10px !important;
+  padding: 10px 16px !important;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.clearBtn:hover {
+  background: #f7f8fc !important;
+  border-color: #9fa2b4 !important;
+  color: #252733 !important;
+}
+
+.checkoutBtn {
+  flex: 2;
+  background: #101010 !important;
+  border: 1px solid #101010 !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  padding: 10px 16px !important;
+  font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+
+.checkoutBtn:hover {
+  background: #2a2a2a !important;
+  border-color: #2a2a2a !important;
+}
+
+.emptyCart {
+  text-align: center;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyCartText {
+  color: #9fa2b4;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.emptyCartIcon {
+  font-size: 3rem;
+  color: #e2e5ee;
+  margin-bottom: 8px;
+}
+
+.continueShoppingBtn {
+  background: #4c6fff !important;
+  border-color: #4c6fff !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  padding: 8px 20px !important;
+  font-weight: 600;
+}
+
+.continueShoppingBtn:hover {
+  background: #3b5bdb !important;
+  border-color: #3b5bdb !important;
+}
+

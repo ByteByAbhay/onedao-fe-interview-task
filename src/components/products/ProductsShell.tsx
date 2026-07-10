@@ -8,12 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProductCard from "./ProductCard";
 import CategoryFilter from "./CategoryFilter";
+import CartModal from "./CartModal";
 import { products, type Category } from "@/data/productsData";
 import { useAppSelector } from "@/store/hooks";
 import styles from "./products.module.css";
 
 export default function ProductsShell() {
   const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
+  const [showCart, setShowCart] = useState(false);
+  
   const cartQuantities = useAppSelector((state) => state.cart.quantities);
   const cartCount = useMemo(
     () => Object.values(cartQuantities).reduce((sum, qty) => sum + qty, 0),
@@ -36,10 +39,15 @@ export default function ProductsShell() {
             <h1 className={styles.pageTitle}>Our Products</h1>
             <p className={styles.pageSubtitle}>Browse our full collection, curated just for you.</p>
           </div>
-          <div className={styles.cartBadgeWrap} aria-label={`${cartCount} items in cart`}>
+          <button
+            type="button"
+            className={styles.cartBadgeWrap}
+            onClick={() => setShowCart(true)}
+            aria-label={`Open shopping cart, ${cartCount} items in cart`}
+          >
             <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
             <span className={styles.cartCount}>{cartCount}</span>
-          </div>
+          </button>
         </header>
 
         <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
@@ -56,6 +64,9 @@ export default function ProductsShell() {
           <p className={styles.emptyState}>No products found in this category.</p>
         )}
       </Container>
+
+      <CartModal show={showCart} onHide={() => setShowCart(false)} />
     </div>
   );
 }
+
