@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import ProductCard from "./ProductCard";
 import CategoryFilter from "./CategoryFilter";
 import CartModal from "./CartModal";
@@ -39,15 +40,21 @@ export default function ProductsShell() {
             <h1 className={styles.pageTitle}>Our Products</h1>
             <p className={styles.pageSubtitle}>Browse our full collection, curated just for you.</p>
           </div>
-          <button
-            type="button"
-            className={styles.cartBadgeWrap}
-            onClick={() => setShowCart(true)}
-            aria-label={`Open shopping cart, ${cartCount} items in cart`}
-          >
-            <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
-            <span className={styles.cartCount}>{cartCount}</span>
-          </button>
+          <div className={styles.headerActions}>
+            <Link href="/login" className={styles.adminLoginBtn}>
+              <FontAwesomeIcon icon={faRightToBracket} aria-hidden="true" />
+              Admin Login
+            </Link>
+            <button
+              type="button"
+              className={styles.cartBadgeWrap}
+              onClick={() => setShowCart(true)}
+              aria-label={`Open shopping cart, ${cartCount} items in cart`}
+            >
+              <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
+              <span className={styles.cartCount}>{cartCount}</span>
+            </button>
+          </div>
         </header>
 
         <CategoryFilter active={activeCategory} onChange={setActiveCategory} />

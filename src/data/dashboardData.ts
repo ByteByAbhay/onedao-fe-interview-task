@@ -14,16 +14,19 @@ import {
   faSackDollar,
   faChartLine,
   faUserGroup,
+  faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
 
 export type NavItem = {
   id: string;
   label: string;
   icon: IconDefinition;
+  href?: string;
 };
 
 export const navItems: NavItem[] = [
   { id: "dashboard", label: "Dashboard", icon: faTableCellsLarge },
+  { id: "products", label: "Products", icon: faBagShopping, href: "/products" },
   { id: "orders", label: "Orders", icon: faClipboardList },
   { id: "rides", label: "Rides", icon: faRoute },
   { id: "clients", label: "Clients", icon: faUsers },

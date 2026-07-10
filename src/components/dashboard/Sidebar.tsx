@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "./Avatar";
 import { navItems, type Person } from "@/data/dashboardData";
@@ -73,18 +74,29 @@ export default function Sidebar({ user, activeId, onSelect, isOpen, onClose }: S
                       itemRefs.current[item.id] = el;
                     }}
                   >
-                    <button
-                      type="button"
-                      className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
-                      onClick={() => {
-                        onSelect(item.id);
-                        onClose();
-                      }}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      <FontAwesomeIcon icon={item.icon} className={styles.navIcon} aria-hidden="true" />
-                      <span>{item.label}</span>
-                    </button>
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        className={styles.navItem}
+                        onClick={onClose}
+                      >
+                        <FontAwesomeIcon icon={item.icon} className={styles.navIcon} aria-hidden="true" />
+                        <span>{item.label}</span>
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
+                        onClick={() => {
+                          onSelect(item.id);
+                          onClose();
+                        }}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        <FontAwesomeIcon icon={item.icon} className={styles.navIcon} aria-hidden="true" />
+                        <span>{item.label}</span>
+                      </button>
+                    )}
                   </li>
                 );
               })}
