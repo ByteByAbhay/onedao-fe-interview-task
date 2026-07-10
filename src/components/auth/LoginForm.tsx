@@ -2,12 +2,16 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Button from "react-bootstrap/Button";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import AuthShell from "./AuthShell";
 import FormField from "./FormField";
 import PasswordToggleButton from "./PasswordToggleButton";
 import styles from "./auth.module.css";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { loginSuccess } from "@/store/authSlice";
+import { showToast } from "@/store/toastSlice";
 
 type FieldErrors = {
   email?: string;
@@ -17,6 +21,9 @@ type FieldErrors = {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function LoginForm() {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.auth.users);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -44,8 +51,22 @@ export default function LoginForm() {
 
     setIsSubmitting(true);
     try {
-      // TODO: replace with real authentication call once the API is available.
+      // TODO: replace with a real authentication call once the API is available.
       await new Promise((resolve) => setTimeout(resolve, 600));
+      const match = users.find((user) => user.email === email && user.password === password);
+      if (!match) {
+        setErrors({ password: "Invalid email or password." });
+        return;
+      }
+      dispatch(loginSuccess({ email: match.email }));
+      dispatch(
+        showToast({
+          title: "Welcome back",
+          message: "You're logged in.",
+          variant: "success",
+        }),
+      );
+      router.push("/dashboard");
     } finally {
       setIsSubmitting(false);
     }

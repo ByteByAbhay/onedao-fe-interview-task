@@ -9,6 +9,9 @@ import AuthShell from "./AuthShell";
 import FormField from "./FormField";
 import PasswordToggleButton from "./PasswordToggleButton";
 import styles from "./auth.module.css";
+import { useAppDispatch } from "@/store/hooks";
+import { generateOtp, registerUser } from "@/store/authSlice";
+import { showToast } from "@/store/toastSlice";
 
 type FieldErrors = {
   email?: string;
@@ -21,6 +24,7 @@ const MIN_PASSWORD_LENGTH = 8;
 
 export default function RegisterForm() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -57,8 +61,17 @@ export default function RegisterForm() {
 
     setIsSubmitting(true);
     try {
-      // TODO: replace with real registration call once the API is available.
+      // TODO: replace with a real registration call + server-issued OTP once the API is available.
       await new Promise((resolve) => setTimeout(resolve, 600));
+      const otp = generateOtp();
+      dispatch(registerUser({ email, password, otp }));
+      dispatch(
+        showToast({
+          title: "Verification code sent",
+          message: `Your OTP is ${otp}`,
+          variant: "info",
+        }),
+      );
       router.push("/otp");
     } finally {
       setIsSubmitting(false);

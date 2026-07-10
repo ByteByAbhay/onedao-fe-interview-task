@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/lib/fontawesome";
 import "./globals.css";
+import ReduxProvider from "@/components/providers/ReduxProvider";
+import ToastHost from "@/components/ui/ToastHost";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +32,12 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <ReduxProvider>
+          {children}
+          <ToastHost />
+        </ReduxProvider>
+      </body>
     </html>
   );
 }

@@ -1,14 +1,21 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import Button from "react-bootstrap/Button";
 import AuthShell from "./AuthShell";
 import OtpInput from "./OtpInput";
 import styles from "./auth.module.css";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { verifyOtp } from "@/store/authSlice";
+import { showToast } from "@/store/toastSlice";
 
 const OTP_LENGTH = 6;
 
 export default function OtpForm() {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const pendingOtp = useAppSelector((state) => state.auth.pendingOtp);
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,8 +30,21 @@ export default function OtpForm() {
     setError(undefined);
     setIsSubmitting(true);
     try {
-      // TODO: replace with real OTP verification call once the API is available.
+      // TODO: replace with a real OTP verification call once the API is available.
       await new Promise((resolve) => setTimeout(resolve, 600));
+      if (!pendingOtp || code !== pendingOtp) {
+        setError("Incorrect OTP. Please try again.");
+        return;
+      }
+      dispatch(verifyOtp());
+      dispatch(
+        showToast({
+          title: "Email verified",
+          message: "Your account is verified. Please log in to continue.",
+          variant: "success",
+        }),
+      );
+      router.push("/login");
     } finally {
       setIsSubmitting(false);
     }
